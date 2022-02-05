@@ -2,5 +2,5 @@
 config.js
 
 # Currently unused
-  ## Environment variables
+  # Environment variables
   process.env
