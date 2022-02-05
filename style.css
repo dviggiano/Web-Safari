@@ -1,0 +1,26 @@
+a:link, a:visited {
+    color: #07203f;
+}
+
+.active {
+	font-weight: bold;
+}
+
+.float {
+    float: right;
+}
+
+.loader {
+    animation: spin 2s linear infinite;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #c4c4c4;
+    margin: 0 auto;
+    width: 48px;
+    height: 48px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

@@ -1,0 +1,192 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Web Safari</title>
+        <link rel="icon" href="favicon.ico">
+        <!-- Bulma stylesheet -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <!-- Font Awesome stylesheet -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+        <!-- Custom stylesheet -->
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body class="has-text-centered">
+        <!-- Sign up modal -->
+        <div class="modal" id="signup-modal">
+            <div class="modal-background" id="signup-modalbg"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <h1 class="modal-card-title">Sign up!</h1>
+                    <button id="signup-close" class="delete" aria-label="close"></button>
+                </header>
+                <form id="signup-form">
+                    <section class="modal-card-body has-text-left">
+                        <!-- Email -->
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input class="input" type="email" id="email-signup" placeholder="bbadger@wisc.edu">
+                            </div>
+                        </div>
+                        <!-- Password -->
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input class="input" type="password" id="password-signup" placeholder="**********">
+                            </div>
+                        </div>
+                        <p id="signup-error" class="has-text-danger pt-3 pl-1"></p>
+                    </section>
+                    <!-- Submit -->
+                    <div class="field modal-card-foot">
+                        <div class="control">
+                            <input type="submit" class="button m-3 is-link" id="signup-button" value="Sign up">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Sign in modal -->
+        <div class="modal" id="signin-modal">
+            <div class="modal-background" id="signin-modalbg"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <h1 class="modal-card-title">Sign in!</h1>
+                    <button id="signin-close" class="delete" aria-label="close"></button>
+                </header>
+                <form id="signin-form">
+                    <section class="modal-card-body has-text-left">
+                        <!-- Email -->
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input class="input" type="email" id="email-signin" placeholder="bbadger@wisc.edu">
+                            </div>
+                        </div>
+                        <!-- Password -->
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input class="input" type="password" id="password-signin" placeholder="**********">
+                            </div>
+                        </div>
+                        <p id="signin-error" class="has-text-danger pt-3 pl-1"></p>
+                        <p class="pt-3 pl-1 is-hidden" id="recover">
+                            <a class="is-link has-text-link">
+                                Our team has been notified. Look out for a password reset email!
+                            </a>
+                        </p>
+                    </section>
+                    <!-- Submit -->
+                    <div class="field modal-card-foot">
+                        <div class="control">
+                            <input type="submit" class="button m-3 is-link" id="signin-button" value="Sign in">
+                            <button class="button m-3 is-danger is-hidden" id="forgot">Forgot password</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Inbox modal -->
+        <div class="modal" id="inbox-modal">
+            <div class="modal-background" id="inbox-modalbg"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <h1 class="modal-card-title">Unapproved reviews</h1>
+                    <button id="inbox-close" class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body has-text-left" id="inbox-content">
+                    <div id="unapproved"></div>
+                </section>
+            </div>
+        </div>
+        <!-- Navigation -->
+        <nav class="navbar box is-size-5 has-background-info-light p-2 is-bordered" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <div class="navbar-item">
+                    <a class="fa-2x fas fa-solid fa-otter" id="home"></a>
+                </div>
+                <a role="button" id="burger" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="nav-links">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="nav-links" class="navbar-menu has-background-info-light">
+                <div class="navbar-start">
+                    <a class="navbar-item has-text-black is-tab" id="mammals">
+                        Mammals
+                    </a>
+                    <a class="navbar-item has-text-black is-tab" id="birds">
+                        Birds
+                    </a>
+                    <a class="navbar-item has-text-black is-tab" id="reptiles">
+                        Reptiles
+                    </a>
+                    <a class="navbar-item has-text-black is-tab" id="amphibians">
+                        Amphibians
+                    </a>
+                    <a class="navbar-item has-text-black is-tab" id="fish">
+                        Fish
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-end">
+                <a class="navbar-item has-text-black is-tab signedout" id="signin">
+                    Sign in
+                </a>
+                <a class="navbar-item has-text-black is-tab signedout" id="signup">
+                    Sign up
+                </a>
+                <a class="navbar-item is-hidden has-text-black is-tab admin" id="admin">
+                    Unapproved reviews
+                </a>
+                <a class="navbar-item has-text-black is-tab signedin" id="signout">
+                    Sign out
+                </a>
+            </div>
+            <hr>
+        </nav>
+        <!-- Content -->
+        <div id="content"><br><div class="loader"></div><br></div>
+        <!-- Footer -->
+        <footer>
+            <div class="box has-text-left has-background-info-light mt-3 p-3">
+                <div class="float has-text-right">
+                    <a href="https://bulma.io">
+                        <img
+                        src="https://bulma.io/images/made-with-bulma--semiblack.png"
+                        alt="Made with Bulma"
+                        width="128"
+                        height="24">
+                    </a>
+                    <br>
+                    <a id="sources" class="has-text-black m-2">Sources</a>
+                </div>
+                <p>
+                    Copyright &copy; 2021-2022 David Viggiano
+                    <br>
+                    <a href="https://business.wisc.edu/">Wisconsin School of Business</a>
+                </p>
+            </div>
+        </footer>
+        <!-- Firebase app -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+        <!-- Firebase SDK for analytics -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+        <!-- Other Firebase products -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+        <!-- Configure Firbase -->
+        <script src="config.js"></script>
+        <!-- Custom script -->
+        <script type="module" src="app.js"></script>
+    </body>
+</html>
