@@ -1,2 +1,5 @@
 # Firebase configuration
 config.js
+
+# Environment variables
+process.env
