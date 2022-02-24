@@ -1,6 +1,6 @@
 # <a href="https://web-safari.web.app/">Web Safari</a>
 
-Created using JavaScript, HTML, CSS, the Bulma CSS framework, and Firebase.
+Created using vanilla JavaScript, HTML, CSS, the Bulma CSS framework, and Firebase.
  
 ## Current Features
  * Identify zoos with exhibits for a pool of animals
@@ -14,9 +14,8 @@ Created using JavaScript, HTML, CSS, the Bulma CSS framework, and Firebase.
  * User profiles
  * Get real-time zoo data
  * Updated original graphics, including star rating reviews and animal images of a uniform style
- 
-## Planned Improvements
- * JS React
  * Form submission constraints
- * Event listeners should be replaced with onClick
- * Update collections to reduce operations (such as the need for an encoder)
+
+## Design Flaws
+ * This app was intended to be created with vanilla JavaScript, but could greatly benefit from a framework such as React
+ * Collections should have been designed more efficiently to reduce operations (such as the need for an encoder)
