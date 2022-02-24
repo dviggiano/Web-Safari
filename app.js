@@ -58,7 +58,7 @@ function getData(name) {
 const users = getData('users');
 const animals = getData('animals')
 const zoos = getData('zoos');
-try { let unapprovedArray = getData('unapproved'); } catch (err) { };
+try { let unapprovedReviews = getData('unapproved'); } catch (err) { };
 
 // create a reference for the current user data
 function currUser() { 
@@ -280,7 +280,7 @@ function homePage() {
             reviewForm.reset();
         });
         // import new reviews
-        try { let unapprovedArray = getData('unapproved'); } catch (err) { };
+        try { let unapprovedReviews = getData('unapproved'); } catch (err) { };
     });
 
     // feedback form
