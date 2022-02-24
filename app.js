@@ -484,12 +484,12 @@ function approve(review) {
     // if the user is an administrator...
     if (currUser().admin == true) {
         // encoder
-        let id = undefined;
-        if (review.zoo == 'Columbus Zoo and Aquarium') { id = '1' }
-        else if (review.zoo == 'Henry Vilas Zoo') { id = '2' }
-        else if (review.zoo == 'Lincoln Park Zoo') { id = '3' }
-        else if (review.zoo == 'Milwaukee County Zoo') { id = '4' }
-        else { id = '5' };
+        let id = null;
+        zoos.forEach(zoo => {
+            if (zoo.name == review.zoo) {
+                id = zoo.id;
+            }
+        })
         // add review to zoo
         db.collection('zoos').doc(id).update({ 
             reviews: firebase.firestore.FieldValue.arrayUnion({
@@ -497,6 +497,8 @@ function approve(review) {
                 score: review.score
             })
         });
+        // remove review from unapproved
+        db.collection('unapproved').doc
     };
 }
 
