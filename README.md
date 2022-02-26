@@ -1,6 +1,6 @@
 # <a href="https://web-safari.web.app/">Web Safari</a>
 
-Single-page app created using vanilla JavaScript, HTML, CSS, the Bulma CSS framework, and Firebase.
+Single-page web application created using vanilla JavaScript, HTML, CSS, the Bulma CSS framework, and Firebase.
  
 ## Current Features
  * Identify zoos with exhibits for a pool of animals
