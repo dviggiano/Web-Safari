@@ -469,7 +469,7 @@ function configureContent(active) {
         signedOut.forEach(element => { element.classList.add('is-hidden'); });
         if (currUser().admin) { unapprovedReviews = getData('unapproved'); }
         // DISABLED: access admin content
-        // if (currUser() == null == false && currUser().admin == true) {
+        // if (currUser().admin) {
         //     admin.classList.remove('is-hidden');
         // };
     // otherwise...
