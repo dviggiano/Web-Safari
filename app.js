@@ -58,7 +58,7 @@ function getData(name) {
 const users = getData('users');
 const animals = getData('animals')
 const zoos = getData('zoos');
-try { let unapprovedReviews = getData('unapproved'); } catch (err) { };
+let unapprovedReviews = [];
 
 // create a reference for the current user data
 function currUser() { 
@@ -280,7 +280,7 @@ function homePage() {
             reviewForm.reset();
         });
         // import new reviews
-        try { let unapprovedReviews = getData('unapproved'); } catch (err) { };
+        if (currUser().admin) { let unapprovedReviews = getData('unapproved'); }
     });
 
     // feedback form
@@ -467,6 +467,7 @@ function configureContent(active) {
             };
         });
         signedOut.forEach(element => { element.classList.add('is-hidden'); });
+        if (currUser().admin) { let unapprovedReviews = getData('unapproved'); }
         // DISABLED: access admin content
         // if (currUser() == null == false && currUser().admin == true) {
         //     admin.classList.remove('is-hidden');
