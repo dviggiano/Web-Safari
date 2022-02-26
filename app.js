@@ -280,7 +280,7 @@ function homePage() {
             reviewForm.reset();
         });
         // import new reviews
-        if (currUser().admin) { let unapprovedReviews = getData('unapproved'); }
+        if (currUser().admin) { unapprovedReviews = getData('unapproved'); }
     });
 
     // feedback form
@@ -467,7 +467,7 @@ function configureContent(active) {
             };
         });
         signedOut.forEach(element => { element.classList.add('is-hidden'); });
-        if (currUser().admin) { let unapprovedReviews = getData('unapproved'); }
+        if (currUser().admin) { unapprovedReviews = getData('unapproved'); }
         // DISABLED: access admin content
         // if (currUser() == null == false && currUser().admin == true) {
         //     admin.classList.remove('is-hidden');
