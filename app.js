@@ -627,29 +627,6 @@ burger.addEventListener('click', () => {
     };
 });
 
-// TO DO: inbox
-// let unapprovedArray = getData('unapproved');
-// // loop through unapproved reviews
-// let counter = 0;
-// unapprovedArray.forEach(review => {
-//     // add review to inbox
-//     unapproved.innerHTML +=  `
-//         <div class="box" id="${counter}">
-//             <h4 class="subtitle">${review.zoo}</subtitle>
-//             <br>
-//             ${review.text}
-//             <hr>
-//             <p class="has-text-small">
-//                 <b>Score</b>:&nbsp;${review.score}
-//             </p>
-//         </div>
-//     `;
-//     counter += 1;
-//     unapproved.innerHTML += `<button class="delete inbox-delete" aria-label="close"></button>`;
-//     // TO DO: remove when approved or denied
-//     document.querySelector(".inbox-delete").addEventListener('click', () => { document.querySelector(`${counter}`).innerHTML = '' });
-// });
-
 // dynamically change content of the box div depending on different links clicked if content is ready
 home.addEventListener('click', () => { if (content.innerHTML !== loader) { homePage() } });
 mammals.addEventListener('click', () => { if (content.innerHTML !== loader) { animalPage('mammal') } });
