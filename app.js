@@ -145,11 +145,11 @@ function homePage() {
             if (reviews == '') { reviews = '<i>No reviews have been left for this zoo yet!</i>' }
             // collect all checked animals
             let checkedArray = []
-            document.querySelectorAll('.search').forEach(box => { if (box.checked == true) { checkedArray.push(box) }; });
+            document.querySelectorAll('.search').forEach(box => { if (box.checked) { checkedArray.push(box) }; });
             // if the zoo is not missing any checked animals, add zoo
             let include = true
-            checkedArray.forEach(box => { if (zoo.animals.includes(box.value) == false) { include = false } });
-            if (include == true && activeZoos.includes(zoo) == false) {
+            checkedArray.forEach(box => { if (!zoo.animals.includes(box.value)) { include = false } });
+            if (include && !activeZoos.includes(zoo)) {
                 zooContent += `
                     <h3>
                         <a href="${zoo.link}" class="has-text-weight-semibold">${zoo.name}</a>
@@ -462,7 +462,7 @@ function configureContent(active) {
         if (checkdiv !== null) { checkdiv.innerHTML = checkboxes; };
         // show all elements with the signedin class and hide all the elements with the signedout class
         signedIn.forEach(element => { 
-            if (bothButtons().includes(element) == false || favoriteButtons.includes(element) && favorites.includes(element.id.slice(0, -8)) == false || removeButtons.includes(element) && favorites.includes(element.id.slice(0, -6)) ) {
+            if (!bothButtons().includes(element) || favoriteButtons.includes(element) && !favorites.includes(element.id.slice(0, -8)) || removeButtons.includes(element) && favorites.includes(element.id.slice(0, -6)) ) {
                 element.classList.remove('is-hidden'); 
             };
         });
@@ -483,7 +483,7 @@ function configureContent(active) {
 
 function approve(review) {
     // if the user is an administrator...
-    if (currUser().admin == true) {
+    if (currUser().admin) {
         // encoder
         let id = null;
         zoos.forEach(zoo => {
@@ -618,7 +618,7 @@ configureContent();
 const burger = document.getElementById('burger');
 burger.addEventListener('click', () => {
     const navLinks = document.getElementById('nav-links');
-    if (navLinks.classList.contains('is-active') == true) {
+    if (navLinks.classList.contains('is-active')) {
         burger.classList.remove('is-active');
         navLinks.classList.remove('is-active');
     } else { 
