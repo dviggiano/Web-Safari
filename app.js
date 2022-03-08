@@ -287,7 +287,7 @@ function homePage() {
     submitFeedback.addEventListener('click', (event) => {
         // prevent auto refresh on the page
         event.preventDefault();
-        let email = undefined;
+        let email;
         // if the user is signed in, then get their email
         if (auth.currentUser !== null) { email = auth.currentUser.email }
         // otherwise, pull from the email field
@@ -485,7 +485,7 @@ function approve(review) {
     // if the user is an administrator...
     if (currUser().admin) {
         // encoder
-        let id = null;
+        let id;
         zoos.forEach(zoo => {
             if (zoo.name == review.zoo) {
                 id = zoo.id;
@@ -499,7 +499,7 @@ function approve(review) {
             })
         });
         // remove review from unapproved
-        db.collection('unapproved').doc
+        db.collection('unapproved').doc;
     };
 }
 
