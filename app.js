@@ -87,8 +87,8 @@ let favorites = [];
 if (auth.currentUser !== null) { favorites = currUser().favorites; }
 
 // create functions
-function showModal(trigger, modal) { trigger.addEventListener('click', () => { modal.classList.add('is-active'); }) }
-function hideModal(trigger, modal) { trigger.addEventListener('click', () => { modal.classList.remove('is-active') }) }
+function showModal(trigger, modal) { trigger.onclick = () => { modal.classList.add('is-active'); } }
+function hideModal(trigger, modal) { trigger.onclick = () => { modal.classList.remove('is-active') } }
 
 function removeItem(arr, value) {
     const index = arr.indexOf(value);
@@ -260,7 +260,7 @@ function homePage() {
     const submitFeedback = document.getElementById('submit-feedback');
     const resetFeedback = document.getElementById('reset-feedback');
     // review form
-    submitReview.addEventListener('click', (event) => {
+    submitReview.onclick = () => {
         // prevent auto refresh on the page
         event.preventDefault();
         // get review data
@@ -281,10 +281,10 @@ function homePage() {
         });
         // import new reviews
         if (currUser().admin) { unapprovedReviews = getData('unapproved'); }
-    });
+    };
 
     // feedback form
-    submitFeedback.addEventListener('click', (event) => {
+    submitFeedback.onclick = () => {
         // prevent auto refresh on the page
         event.preventDefault();
         let email;
@@ -304,10 +304,11 @@ function homePage() {
             // reset the form
             feedbackForm.reset();
         });
-    });
-    go.addEventListener('click', () => {
+    }
+
+    go.onclick = () => {
         document.getElementById('zoo-content').innerHTML = loadZooContent();
-    });
+    };
 }
 
 function animalPage(type) {
@@ -399,7 +400,7 @@ function animalPage(type) {
     const removeButtons = document.querySelectorAll('.remove');
     favoriteButtons.forEach(button => { 
         // when the button is clicked...
-        button.addEventListener('click', () => { 
+        button.onclick = () => { 
             // update variables
             favorites.push(button.id.slice(0, -8));
             // add to the database
@@ -411,12 +412,12 @@ function animalPage(type) {
                 // show opposite button
                 if (remove.id.slice(0, -6) == button.id.slice(0, -8)) { (remove.classList.remove('is-hidden')); };
             });
-        });
+        };
     });
     // remove favorites
     removeButtons.forEach(button => { 
         // when the button is clicked...
-        button.addEventListener('click', () => { 
+        button.onclick = () => { 
             // update variable
             favorites = removeItem(favorites, button.id.slice(0, -6));
             // remove from the database
@@ -428,7 +429,7 @@ function animalPage(type) {
                 // show opposite button
                 if (favorite.id.slice(0, -8) == button.id.slice(0, -6)) { (favorite.classList.remove('is-hidden')); };
             });
-        });
+        };
     });
 }
 
@@ -577,10 +578,10 @@ signinForm.addEventListener('submit', (event) => {
         // if the user has entered invalid credentials 3 times, display the forgot password button
         if (invalidCredentials >= 3) { 
             forgot.classList.remove('is-hidden'); 
-            forgot.addEventListener('click', () => {
+            forgot.onclick = () => {
                 recover.classList.remove('is-hidden');
                 db.collection('forgot').doc(email).set({ });
-            });
+            };
         }
         // otherwise, if the user has entered invalid credentials, add to the counter
         else if (err.message == "The password is invalid or the user does not have a password.") { invalidCredentials++ };
@@ -588,13 +589,13 @@ signinForm.addEventListener('submit', (event) => {
 });
 
 // enable sign out
-document.getElementById('signout').addEventListener('click', () => { 
+document.getElementById('signout').onclick = () => { 
     // reset variables
     favorites = [];
     // sign out
     auth.signOut();
     console.log("Signed out!");
-});
+};
 
 // check status
 auth.onAuthStateChanged(user => {
@@ -616,7 +617,7 @@ configureContent();
 
 // nav burger
 const burger = document.getElementById('burger');
-burger.addEventListener('click', () => {
+burger.onclick = () => {
     const navLinks = document.getElementById('nav-links');
     if (navLinks.classList.contains('is-active')) {
         burger.classList.remove('is-active');
@@ -625,16 +626,16 @@ burger.addEventListener('click', () => {
         burger.classList.add('is-active');
         navLinks.classList.add('is-active') 
     };
-});
+};
 
 // dynamically change content of the box div depending on different links clicked if content is ready
-home.addEventListener('click', () => { if (content.innerHTML !== loader) { homePage() } });
-mammals.addEventListener('click', () => { if (content.innerHTML !== loader) { animalPage('mammal') } });
-birds.addEventListener('click', () => { if (content.innerHTML !== loader) { animalPage('bird') } });
-reptiles.addEventListener('click', () => { if (content.innerHTML !== loader) { animalPage('reptile') } });
-amphibians.addEventListener('click', () => { if (content.innerHTML !== loader) { animalPage('amphibian') } });
-fish.addEventListener('click', () => { if (content.innerHTML !== loader) { animalPage('fish') } });
-sources.addEventListener('click', () => { if (content.innerHTML !== loader) {
+home.onclick = () => { if (content.innerHTML !== loader) { homePage() } };
+mammals.onclick = () => { if (content.innerHTML !== loader) { animalPage('mammal') } };
+birds.onclick = () => { if (content.innerHTML !== loader) { animalPage('bird') } };
+reptiles.onclick = () => { if (content.innerHTML !== loader) { animalPage('reptile') } };
+amphibians.onclick = () => { if (content.innerHTML !== loader) { animalPage('amphibian') } };
+fish.onclick = () => { if (content.innerHTML !== loader) { animalPage('fish') } };
+sources.onclick = () => { if (content.innerHTML !== loader) {
     content.innerHTML = `
         <div class="has-text-left p-5">
             <p class="is-size-4">Animal clipart</p>
@@ -656,4 +657,4 @@ sources.addEventListener('click', () => { if (content.innerHTML !== loader) {
         </div>
         `;
     }
-});
+};
