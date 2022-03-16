@@ -9,7 +9,7 @@ Single-page web application created using vanilla JavaScript, HTML, CSS, the Bul
  * Create accounts to save favorite animals, which will automatically update the default zoo filter
  
 ## Planned Features
- * Administrator inbox to view messages, approve reviews, add zoos/animals directly from interface
+ * Administrator inbox to view messages, approve reviews, add zoos/animals directly from app interface
  * Replace zoo list with a central map; colorcode zoos based on amount of selected animals as opposed to hiding them
  * User profiles
  * Get real-time zoo data
@@ -17,4 +17,4 @@ Single-page web application created using vanilla JavaScript, HTML, CSS, the Bul
 
 ## Design Flaws
  * This app was intended to be created with vanilla JavaScript, but could greatly benefit from a framework such as React
- * Collections should have been designed more efficiently to reduce operations (such as the need for an encoder)
+ * Firestore collections should have been designed more efficiently to reduce operations (such as the need for an encoder)
