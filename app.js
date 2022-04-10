@@ -1,63 +1,67 @@
 // create references for page elements
-const home = document.getElementById('home');
-const mammals = document.getElementById('mammals');
-const birds = document.getElementById('birds');
-const reptiles = document.getElementById('reptiles');
-const amphibians = document.getElementById('amphibians');
-const fish = document.getElementById('fish');
+function element(name) {
+    return document.getElementById(name);
+}
 
-const signin = document.getElementById('signin');
-const signinModal = document.getElementById('signin-modal');
-const signinBackground = document.getElementById('signin-modalbg');
-const signinButton = document.getElementById('signinin-button');
-const signinForm = document.getElementById('signin-form');
-const signinClose = document.getElementById('signin-close');
-const signinError = document.getElementById('signin-error');
-const forgot = document.getElementById('forgot');
-const recover = document.getElementById('recover');
+const home = element('home');
+const mammals = element('mammals');
+const birds = element('birds');
+const reptiles = element('reptiles');
+const amphibians = element('amphibians');
+const fish = element('fish');
 
-let invalidCredentials = 0
+const signin = element('signin');
+const signinModal = element('signin-modal');
+const signinBackground = element('signin-modalbg');
+const signinButton = element('signinin-button');
+const signinForm = element('signin-form');
+const signinClose = element('signin-close');
+const signinError = element('signin-error');
+const forgot = element('forgot');
+const recover = element('recover');
 
-const signup = document.getElementById('signup');
-const signupModal = document.getElementById('signup-modal');
-const signupBackground = document.getElementById('signup-modalbg');
-const signupButton = document.getElementById('signup-button');
-const signupForm = document.getElementById('signup-form');
-const signupClose = document.getElementById('signup-close');
-const signupError = document.getElementById('signin-error');
+let invalidCredentials = 0;
 
-const admin = document.getElementById('admin');
-const inboxModal = document.getElementById('inbox-modal');
-const inboxBackground = document.getElementById('inbox-modalbg');
-const inboxClose = document.getElementById('inbox-close');
-const inboxContent = document.getElementById('inbox-content');
-const unapproved = document.getElementById('unapproved');
+const signup = element('signup');
+const signupModal = element('signup-modal');
+const signupBackground = element('signup-modalbg');
+const signupButton = element('signup-button');
+const signupForm = element('signup-form');
+const signupClose = element('signup-close');
+const signupError = element('signin-error');
 
-const feedbackButton = document.getElementById('feedback-button');
+const admin = element('admin');
+const inboxModal = element('inbox-modal');
+const inboxBackground = element('inbox-modalbg');
+const inboxClose = element('inbox-close');
+const inboxContent = element('inbox-content');
+const unapproved = element('unapproved');
 
-const sources = document.getElementById('sources');
+const feedbackButton = element('feedback-button');
 
-const content = document.getElementById('content');
+const sources = element('sources');
 
-function getData(name) { 
+const content = element('content');
+
+function data(name) { 
     // create array
-    const data = [];
+    const arr = [];
     // get data from collection
     db.collection(`${name}`).get().then(response => { 
     // loop through each datapoint
     response.docs.forEach(datapoint => {
         // put attributes in array
-        data.push(datapoint.data())
+        arr.push(datapoint.data())
         }) 
     }); 
     // return array
-    return data
+    return arr;
 }
 
 // import collections
-const users = getData('users');
-const animals = getData('animals')
-const zoos = getData('zoos');
+const users = data('users');
+const animals = data('animals')
+const zoos = data('zoos');
 let unapprovedReviews = [];
 
 // create a reference for the current user data
@@ -69,7 +73,7 @@ function currUser() {
         admin: false
     };
     // loop through all user data
-    if (auth.currentUser !== null) {
+    if (auth.currentUser) {
         users.forEach(user => { 
             // if the current user has the active user's id...
             if (user.uid == auth.currentUser.uid) { 
@@ -79,12 +83,12 @@ function currUser() {
         }); 
     };
     // return value
-    return current
+    return current;
 };
 
 // create favorites array
 let favorites = [];
-if (auth.currentUser !== null) { favorites = currUser().favorites; }
+if (auth.currentUser) { favorites = currUser().favorites; }
 
 // create functions
 function showModal(trigger, modal) { trigger.onclick = () => { modal.classList.add('is-active'); } }
@@ -252,21 +256,21 @@ function homePage() {
             </div>
         </div>
         `;
-    const reviewForm = document.getElementById('review');
-    const submitReview = document.getElementById('submit-review');
-    const resetReview = document.getElementById('reset-review');
+    const reviewForm = element('review');
+    const submitReview = element('submit-review');
+    const resetReview = element('reset-review');
 
-    const feedbackForm = document.getElementById('feedback');
-    const submitFeedback = document.getElementById('submit-feedback');
-    const resetFeedback = document.getElementById('reset-feedback');
+    const feedbackForm = element('feedback');
+    const submitFeedback = element('submit-feedback');
+    const resetFeedback = element('reset-feedback');
     // review form
     submitReview.onclick = () => {
         // prevent auto refresh on the page
         event.preventDefault();
         // get review data
         const score = document.querySelector('input[type="radio"]:checked').value;
-        const text = document.getElementById('review-text').value;
-        const reviewZoo = document.getElementById('zoo-selector').value;
+        const text = element('review-text').value;
+        const reviewZoo = element('zoo-selector').value;
         // create review
         const newReview = {
             zoo: reviewZoo,
@@ -280,7 +284,7 @@ function homePage() {
             reviewForm.reset();
         });
         // import new reviews
-        if (currUser().admin) { unapprovedReviews = getData('unapproved'); }
+        if (currUser().admin) { unapprovedReviews = data('unapproved'); }
     };
 
     // feedback form
@@ -289,11 +293,11 @@ function homePage() {
         event.preventDefault();
         let email;
         // if the user is signed in, then get their email
-        if (auth.currentUser !== null) { email = auth.currentUser.email }
+        if (auth.currentUser) { email = auth.currentUser.email }
         // otherwise, pull from the email field
-        else { email = document.getElementById('feedback-email').value; };
+        else { email = element('feedback-email').value; };
         // get feedback
-        const text = document.getElementById('feedback-text').value;
+        const text = element('feedback-text').value;
         // create message
         const newMessage = {
                 email: email,
@@ -307,7 +311,7 @@ function homePage() {
     }
 
     go.onclick = () => {
-        document.getElementById('zoo-content').innerHTML = loadZooContent();
+        element('zoo-content').innerHTML = loadZooContent();
     };
 }
 
@@ -333,7 +337,7 @@ function animalPage(type) {
             // if the animal is not a favorite, show the favorite button and hide the remove favorite button
             let button = '';
             if (favorites.includes(animal.name)) { 
-                if (auth.currentUser !== null) {
+                if (auth.currentUser) {
                     button +=  `
                         <span class="has-text-right">
                             <button class="button is-warning is-hidden favorite signed signedin" id="${animal.name}Favorite">Favorite</button>
@@ -350,7 +354,7 @@ function animalPage(type) {
                 };
             // otherwise, vice versa
             } else {
-                if (auth.currentUser !== null) {
+                if (auth.currentUser) {
                     button +=  `
                         <span class="has-text-right">
                             <button class="button is-warning favorite signed signedin" id="${animal.name}Favorite">Favorite</button>
@@ -459,7 +463,7 @@ function configureContent(active) {
                 </div>
                 `
         });
-        const checkdiv = document.getElementById('checkboxes')
+        const checkdiv = element('checkboxes')
         if (checkdiv !== null) { checkdiv.innerHTML = checkboxes; };
         // show all elements with the signedin class and hide all the elements with the signedout class
         signedIn.forEach(element => { 
@@ -468,7 +472,7 @@ function configureContent(active) {
             };
         });
         signedOut.forEach(element => { element.classList.add('is-hidden'); });
-        if (currUser().admin) { unapprovedReviews = getData('unapproved'); }
+        if (currUser().admin) { unapprovedReviews = data('unapproved'); }
         // DISABLED: access admin content
         // if (currUser().admin) {
         //     admin.classList.remove('is-hidden');
@@ -522,8 +526,8 @@ signupForm.addEventListener('submit', (event) => {
     // prevent auto refresh on the page
     event.preventDefault();
     // grab email and password
-    const email = document.getElementById('email-signup').value;
-    const password = document.getElementById('password-signup').value;
+    const email = element('email-signup').value;
+    const password = element('password-signup').value;
     // create user
     auth.createUserWithEmailAndPassword(email, password).then(credentials => {
         console.log("Account created!");
@@ -554,8 +558,8 @@ signinForm.addEventListener('submit', (event) => {
     // prevent auto refresh on the page
     event.preventDefault();
     // grab email and password
-    const email = document.getElementById('email-signin').value;
-    const password = document.getElementById('password-signin').value;
+    const email = element('email-signin').value;
+    const password = element('password-signin').value;
     auth.signInWithEmailAndPassword(email, password).then(credentials => {
         console.log("Signed in!");
         console.log(`UID: ${credentials.user.uid}`);
@@ -589,7 +593,7 @@ signinForm.addEventListener('submit', (event) => {
 });
 
 // enable sign out
-document.getElementById('signout').onclick = () => { 
+element('signout').onclick = () => { 
     // reset variables
     favorites = [];
     // sign out
@@ -616,9 +620,9 @@ setTimeout(() => { homePage() }, 2000);
 configureContent();
 
 // nav burger
-const burger = document.getElementById('burger');
+const burger = element('burger');
 burger.onclick = () => {
-    const navLinks = document.getElementById('nav-links');
+    const navLinks = element('nav-links');
     if (navLinks.classList.contains('is-active')) {
         burger.classList.remove('is-active');
         navLinks.classList.remove('is-active');
