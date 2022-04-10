@@ -1,8 +1,5 @@
 // create references for page elements
-function element(name) {
-    return document.getElementById(name);
-
-}
+function element(name) { return document.getElementById(name); }
 
 const home = element('home');
 const mammals = element('mammals');
@@ -20,8 +17,6 @@ const signinClose = element('signin-close');
 const signinError = element('signin-error');
 const forgot = element('forgot');
 const recover = element('recover');
-
-let invalidCredentials = 0;
 
 const signup = element('signup');
 const signupModal = element('signup-modal');
@@ -46,7 +41,7 @@ const content = element('content');
 
 function data(name) { 
     // create array
-    const arr = [];
+    const arr = Array();
 
     // get data from collection
     db.collection(`${name}`).get().then(response => { 
@@ -68,7 +63,7 @@ function data(name) {
 const users = data('users');
 const animals = data('animals')
 const zoos = data('zoos');
-let unapprovedReviews = [];
+let unapprovedReviews = Array();
 
 // create a reference for the current user data
 function currUser() {
@@ -98,7 +93,7 @@ function currUser() {
 }
 
 // create favorites array
-let favorites = [];
+let favorites = Array();
 
 if (auth.currentUser) { favorites = currUser().favorites; }
 
@@ -308,11 +303,9 @@ function homePage() {
 
     const reviewForm = element('review');
     const submitReview = element('submit-review');
-    const resetReview = element('reset-review');
 
     const feedbackForm = element('feedback');
     const submitFeedback = element('submit-feedback');
-    const resetFeedback = element('reset-feedback');
 
     // review form
     submitReview.onclick = () => {
@@ -336,12 +329,14 @@ function homePage() {
         db.collection('unapproved').add(newReview).then(() => {
             // reset the form
             reviewForm.reset();
+
         });
 
         // import new reviews
         if (currUser().admin) {
             unapprovedReviews = data('unapproved');
         }
+
 
     }
 
@@ -551,9 +546,11 @@ function configureContent(active) {
 
     function bothButtons() {
         if (favoriteButtons.length == 0) {
-            return []
+            return [];
+
         } else {
             return [...favoriteButtons, ...removeButtons];
+
         }
 
     }
@@ -582,7 +579,7 @@ function configureContent(active) {
 
         const checkdiv = element('checkboxes');
 
-        if (checkdiv !== null) { checkdiv.innerHTML = checkboxes; }
+        if (checkdiv) { checkdiv.innerHTML = checkboxes; }
 
         // show all elements with the signedin class and hide all the elements with the signedout class
         signedIn.forEach(element => {
@@ -605,10 +602,12 @@ function configureContent(active) {
         // hide all elements with the signedin class and show all the elements with the signedout class
         signedIn.forEach(element => {
             element.classList.add('is-hidden');
+
         });
 
         signedOut.forEach(element => {
             element.classList.remove('is-hidden');
+
         });
 
         admin.classList.add('is-hidden');
@@ -701,6 +700,8 @@ signupForm.addEventListener('submit', (event) => {
 
 });
 
+let invalidCredentials = 0;
+
 // sign in users
 signinForm.addEventListener('submit', (event) => {
     // prevent auto refresh on the page
@@ -756,7 +757,7 @@ signinForm.addEventListener('submit', (event) => {
 // enable sign out
 element('signout').onclick = () => {
     // reset variables
-    favorites = [];
+    favorites = Array();
     // sign out
     auth.signOut();
     console.log("Signed out!");
