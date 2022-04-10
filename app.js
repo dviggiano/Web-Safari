@@ -1,5 +1,8 @@
 // create references for page elements
-function element(name) { return document.getElementById(name); }
+function element(name) {
+    return document.getElementById(name);
+
+}
 
 const home = element('home');
 const mammals = element('mammals');
@@ -63,6 +66,7 @@ function data(name) {
 const users = data('users');
 const animals = data('animals')
 const zoos = data('zoos');
+
 let unapprovedReviews = Array();
 
 // create a reference for the current user data
@@ -78,7 +82,7 @@ function currUser() {
     if (auth.currentUser) {
         users.forEach(user => {
             // if the current user has the active user's id...
-            if (user.uid == auth.currentUser.uid) {
+            if (user.uid === auth.currentUser.uid) {
                 // save that user
                 current = user
 
@@ -95,11 +99,26 @@ function currUser() {
 // create favorites array
 let favorites = Array();
 
-if (auth.currentUser) { favorites = currUser().favorites; }
+if (auth.currentUser) {
+    favorites = currUser().favorites;
+
+}
 
 // create functions
-function showModal(trigger, modal) { trigger.onclick = () => { modal.classList.add('is-active'); } }
-function hideModal(trigger, modal) { trigger.onclick = () => { modal.classList.remove('is-active') } }
+function showModal(trigger, modal) {
+    trigger.onclick = () => {
+        modal.classList.add('is-active');
+
+    }
+
+}
+
+function hideModal(trigger, modal) {
+    trigger.onclick = () => {
+        modal.classList.remove('is-active');
+    }
+
+}
 
 function removeItem(arr, value) {
     const index = arr.indexOf(value);
@@ -160,19 +179,21 @@ function homePage() {
                     `;
 
                 // if no reviews have yet been identified, just add the review
-                if (reviews == '') {
-                    reviews += '<b class="is-size-5">Reviews</b><br>' + reviewHTML
+                if (reviews === '') {
+                    reviews += '<b class="is-size-5">Reviews</b><br>' + reviewHTML;
+
                 }
                 // otherwise, add a break line and the review
                 else {
-                    reviews = `${reviews}<br>${reviewHTML}`
+                    reviews = `${reviews}<br>${reviewHTML}`;
                 }
 
             });
 
             // if there are no reviews, replace list with alert
-            if (reviews == '') {
-                reviews = '<i>No reviews have been left for this zoo yet!</i>'
+            if (reviews === '') {
+                reviews = '<i>No reviews have been left for this zoo yet!</i>';
+
             }
 
             // collect all checked animals
@@ -217,7 +238,7 @@ function homePage() {
         });
 
         // if there are no zoos, display error message
-        if (zooContent == '') {
+        if (zooContent === '') {
             zooContent = `
                 <p class="is-size-5 has-text-centered m-3">
                     <i>There are no zoos with all of your selected animals!</i>
@@ -390,7 +411,7 @@ function animalPage(type) {
     // loop through each animal
     animals.forEach(animal => {
         // if this animal is in the intended kingdom...
-        if (animal.type == type) {
+        if (animal.type === type) {
             // create list of zoos with this animal
             let currZoos = '';
 
@@ -399,7 +420,7 @@ function animalPage(type) {
                 // if this animal is in this zoo...
                 if (zoo.animals.includes(animal.name)) {
                     // if no zoos have yet been identified, just add the zoo name
-                    if (currZoos == '') {
+                    if (currZoos === '') {
                         currZoos += zoo.name;
                         
                     }
@@ -507,7 +528,7 @@ function animalPage(type) {
             // loop through opposite buttons
             removeButtons.forEach(remove => {
                 // show opposite button
-                if (remove.id.slice(0, -6) == button.id.slice(0, -8)) {
+                if (remove.id.slice(0, -6) === button.id.slice(0, -8)) {
                     (remove.classList.remove('is-hidden'));
 
                 }
@@ -534,7 +555,7 @@ function animalPage(type) {
             // loop through opposite buttons
             favoriteButtons.forEach(favorite => {
                 // show opposite button
-                if (favorite.id.slice(0, -8) == button.id.slice(0, -6)) {
+                if (favorite.id.slice(0, -8) === button.id.slice(0, -6)) {
                     (favorite.classList.remove('is-hidden'));
 
                 }
@@ -554,7 +575,7 @@ function configureContent(active) {
     const removeButtons = [...document.querySelectorAll('.remove')];
 
     function bothButtons() {
-        if (favoriteButtons.length == 0) {
+        if (favoriteButtons.length === 0) {
             return [];
 
         } else {
@@ -632,7 +653,7 @@ function approve(review) {
         let id;
 
         zoos.forEach(zoo => {
-            if (zoo.name == review.zoo) {
+            if (zoo.name === review.zoo) {
                 id = zoo.id;
 
             }
@@ -740,7 +761,7 @@ signinForm.addEventListener('submit', (event) => {
     }).catch(err => {
         console.log(err)
         // display error message on modal
-        if (err.message == 'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.') {
+        if (err.message === 'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.') {
             signinError.innerHTML = `${err.message.slice(0, 88)}`;
 
         } else { signinError.innerHTML = `${err.message}`; }
@@ -757,7 +778,7 @@ signinForm.addEventListener('submit', (event) => {
 
         }
         // otherwise, if the user has entered invalid credentials, add to the counter
-        else if (err.message == "The password is invalid or the user does not have a password.") { invalidCredentials++ }
+        else if (err.message === "The password is invalid or the user does not have a password.") { invalidCredentials++ }
 
     });
 
