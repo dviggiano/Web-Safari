@@ -143,7 +143,7 @@ function homePage() {
         let zooContent = '';
         let currZoos = '';
         // create reference for inserted zoos
-        let activeZoos = []
+        let activeZoos = Array()
 
         // loop through each zoo
         zoos.forEach(zoo => {
@@ -176,20 +176,24 @@ function homePage() {
             }
 
             // collect all checked animals
-            let checkedArray = []
+            let checkedArray = Array();
 
             document.querySelectorAll('.search').forEach(box => {
                 if (box.checked) {
                     checkedArray.push(box)
+
                 }
+
             });
             // if the zoo is not missing any checked animals, add zoo
-            let include = true
+            let include = true;
 
             checkedArray.forEach(box => {
                 if (!zoo.animals.includes(box.value)) {
-                    include = false
+                    include = false;
+
                 }
+
             });
 
             if (include && !activeZoos.includes(zoo)) {
@@ -209,6 +213,7 @@ function homePage() {
                 activeZoos.push(zoo);
 
             }
+
         });
 
         // if there are no zoos, display error message
@@ -223,6 +228,7 @@ function homePage() {
         return zooContent;
 
     }
+
     // replace content with main content
     content.innerHTML = `
         <img src="images/logo.png" style="height: 90px" alt="Web Safari">
@@ -335,6 +341,7 @@ function homePage() {
         // import new reviews
         if (currUser().admin) {
             unapprovedReviews = data('unapproved');
+
         }
 
 
@@ -393,11 +400,13 @@ function animalPage(type) {
                 if (zoo.animals.includes(animal.name)) {
                     // if no zoos have yet been identified, just add the zoo name
                     if (currZoos == '') {
-                        currZoos += zoo.name
+                        currZoos += zoo.name;
+                        
                     }
                     // otherwise, add a bullet point and the zoo name
                     else {
-                        currZoos += ` &bull; ${zoo.name}`
+                        currZoos += ` &bull; ${zoo.name}`;
+
                     }
 
                 }
@@ -421,7 +430,7 @@ function animalPage(type) {
                         <button class="button is-warning is-hidden favorite signed signedin" id="${animal.name}Favorite">Favorite</button>
                         <button class="button is-danger is-hidden remove signedin" id="${animal.name}Remove">Remove favorite</button>
                     </span>
-                    `
+                    `;
 
                 }
                 // otherwise, vice versa
@@ -565,7 +574,7 @@ function configureContent(active) {
             // if the animal is a favorite, add additional HTML to check the box
             let checked = '';
 
-            if (favorites.includes(animal.name)) { checked = ' checked' }
+            if (favorites.includes(animal.name)) { checked = ' checked'; }
 
             // add animal to list of checkboxes
             checkboxes += `
@@ -573,7 +582,7 @@ function configureContent(active) {
                     <input type="checkbox" value="${animal.name}"${checked} class="search">
                     ${animal.name}
                 </div>
-                `
+                `;
 
         });
 
@@ -761,6 +770,7 @@ element('signout').onclick = () => {
     // sign out
     auth.signOut();
     console.log("Signed out!");
+
 }
 
 // check status
@@ -769,11 +779,14 @@ auth.onAuthStateChanged(user => {
     if (user) {
         // configure content
         configureContent(true);
+
     // otherwise...
     } else {
         // configure content
         configureContent();
+
     }
+
 });
 
 // initialize content
@@ -802,12 +815,33 @@ burger.onclick = () => {
 }
 
 // dynamically change content of the box div depending on different links clicked if content is ready
-home.onclick = () => { if (content.innerHTML !== loader) { homePage() } }
-mammals.onclick = () => { if (content.innerHTML !== loader) { animalPage('mammal') } }
-birds.onclick = () => { if (content.innerHTML !== loader) { animalPage('bird') } }
-reptiles.onclick = () => { if (content.innerHTML !== loader) { animalPage('reptile') } }
-amphibians.onclick = () => { if (content.innerHTML !== loader) { animalPage('amphibian') } }
-fish.onclick = () => { if (content.innerHTML !== loader) { animalPage('fish') } }
+home.onclick = () => { 
+    if (content.innerHTML !== loader) { 
+        homePage() 
+    
+    } 
+
+}
+
+const animalPages = [
+    [mammals, "mammal"],
+    [birds, "bird"],
+    [reptiles, "reptile"],
+    [amphibians, "amphibian"], 
+    [fish, "fish"]
+];
+
+animalPages.forEach(page => {
+    page[0].onclick = () => { 
+        if (content.innerHTML !== loader) {
+            animalPage(page[1]);
+
+        }
+
+    }
+
+});
+
 sources.onclick = () => {
     if (content.innerHTML !== loader) {
         content.innerHTML = `
