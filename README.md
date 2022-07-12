@@ -1,4 +1,4 @@
-COMING SOON: v2 in TypeScript and React with real-time zoo data via web scraping
+<b>COMING SOON</b>: v2 in TypeScript and React with real-time zoo data via web scraping
 
 <hr />
 
