@@ -1,5 +1,7 @@
 COMING SOON: v2 in TypeScript and React with real-time zoo data via web scraping
 
+<hr />
+
 # <a href="https://web-safari.web.app/">Web Safari</a>
 
 Single-page web application created using vanilla JavaScript, HTML, CSS, the Bulma CSS framework, and Firebase.
