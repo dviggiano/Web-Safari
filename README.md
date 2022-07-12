@@ -1,4 +1,4 @@
-COMING SOON: v2 in TypeScript, React, and Tailwind CSS with real-time zoo data via web scraping
+COMING SOON: v2 in TypeScript and React with real-time zoo data via web scraping
 
 # <a href="https://web-safari.web.app/">Web Safari</a>
 
